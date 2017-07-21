@@ -43,4 +43,4 @@ class Select extends React.Component {
     }
 }
 
-export default connect(x => ({ form: x.form }))(Select);
+export default connect(x => ({ form: x.forms }))(Select);

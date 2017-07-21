@@ -1,15 +1,12 @@
-export default (s = { form: { errors: {}, validate: {} } }, a) => {
+export default (s = {}, a) => {
     switch (a.type) {
-        case 'textbox':
-        case 'select':
-        case 'radio':
-        case 'checkbox':
-            const s1 = { ...s, form: { ...s.form, [a.name]: a.value } };
+        case 'form_update':
+            const s1 = { ...s, [a.form]: { ...s[a.form], [a.name]: a.value } };
             const req = a.title ? a.title + ' is required' : 'Required';
             if (!a.value && a.required)
-                return setErr(s1, a.name, req);
-            if (a.value && s1.form.errors[a.name] === req)
-                return setErr(s1, a.name, null);
+                return setErr(s1, a.form, a.name, req);
+            if (a.value && s1[a.form].errors && s1[a.form].errors[a.name] === req)
+                return setErr(s1, a.form, a.name, null);
             return s1;
         case 'valid':
             const invalid = a.title ? a.title + ' is invalid' : 'Invalid';
@@ -29,4 +26,4 @@ export default (s = { form: { errors: {}, validate: {} } }, a) => {
     }
 }
 
-const setErr = (s, n, v) => ({ ...s, form: { ...s.form, errors: { ...s.form.errors, [n]: v } } });
+const setErr = (s, f, n, v) => ({ ...s, [f]: { ...s[f], errors: { ...s[f].errors, [n]: v } } });
