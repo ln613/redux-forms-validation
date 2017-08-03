@@ -5,3 +5,4 @@ export { default as Form } from './Form';
 export { default as RadioButton } from './RadioButton';
 export { default as Select } from './Select';
 export { default as TextBox } from './TextBox';
+export { default as InputWrapper } from './InputWrapper';

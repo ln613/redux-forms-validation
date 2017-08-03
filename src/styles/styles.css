@@ -1,0 +1,14 @@
+.rf-title {
+    color: blue;
+}
+.rf-textbox {
+    color: blue;
+}
+.rf-error {
+    color: blue;
+}
+.mui-textfield.rf-title, .mui-textfield.rf-error, .mui-textfield.rf-inputDiv, .mui-textfield.rf-textbox {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}

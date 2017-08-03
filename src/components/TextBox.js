@@ -1,12 +1,7 @@
 import React from 'react';
+import '../styles/styles.css';
 
-export default ({ id, name, value, title, placeholder, disabled, maxLength, change, blur, err }) => (
-    <div>
-        <div>{title}</div>
-        <div>
-            <input type="text" id={id || name} name={name} value={value} className="form-control"
-                onChange={change} onBlur={blur} placeholder={placeholder} disabled={disabled} maxLength={maxLength} />
-        </div>
-        {err ? <div className="error">{err}</div> : null}
-    </div>
+export default ({ id, name, value, placeholder, disabled, maxLength, onChange, onBlur, className }) => (
+    <input type="text" id={id || name} name={name} value={value} className={`${className || ''} rf-textbox`}
+        onChange={onChange} onBlur={onBlur} placeholder={placeholder} disabled={disabled} maxLength={maxLength} />
 );

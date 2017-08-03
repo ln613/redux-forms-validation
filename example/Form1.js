@@ -1,16 +1,56 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import { AddressBox, CheckBox, EmailBox, Form, RadioButton, Select, TextBox } from '../src/components';
+import { AddressBox, CheckBox, EmailBox, Form, RadioButton, Select, TextBox, InputWrapper } from '../src/components';
 import Const from './const';
+import styled, { css } from 'styled-components';
+import { FormControl, Button } from 'react-bootstrap';
+import TextField from 'material-ui/TextField';
+
+const TB1 = styled(TextBox)`
+    &.rf-title {
+        color: orange
+    }
+    &.rf-textbox {
+        color: orange
+    }
+    &.rf-error {
+        color: orange
+    }
+`;
+
+const F1 = styled(Form)`
+    &.rf-title {
+        color: lime
+    }
+    &.rf-textbox {
+        color: lime
+    }
+    &.rf-error {
+        color: lime
+    }
+`;
+
+const validateEmail = x => {
+    if (x.length > 3) return 'too long';
+    if (isNaN(+x)) return 'must be a number';
+}
 
 class Form1 extends React.Component {
     render() {
         return (
             <div className="container">
-                <Form name="form1">
-                    <TextBox title="First Name" name="firstName" required />
-                    <TextBox title="Last Name" name="lastName" required />
+                <F1 name="form1" errorStyle={{ color: 'red' }}>
+                    <TB1 title="First Name" className="t1" titleStyle={{ color: 'red' }} required />
+                    <TB1 title="Last Name" name="lastName" required />
+                    <TextBox title="DOB" name="dob" required />
+                    <TextBox title="Phone" name="phone" required className="form-control t1" />
+                    <FormControl title="PC" name="pc" type="text" required/>
+                    <div>vvv</div>
+                    <TextBox title="Email" name="email" className="mui-textfield" required isValid={validateEmail} />
+                    <TextField hintText="Hint Text" title="Name" required />
+                    <TextField name="password" floatingLabelText="Password" type="Password" required />
+                    <Button bsStyle="primary" submit>Save</Button>
                 {/*<div className="row">
                     <div className="col-sm-3"></div>
                     <div className="col-sm-3">
@@ -78,7 +118,7 @@ class Form1 extends React.Component {
                     </div>
                     <div className="col-sm-3"></div>
                 </div>*/}
-                </Form>    
+                </F1>    
             </div>
         );
     }
