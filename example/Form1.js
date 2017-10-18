@@ -47,7 +47,7 @@ class Form1 extends React.Component {
   render() {
     return (
       <div className="container">
-        <F1 name="form1" className="f" errorStyle={{ color: 'red' }}>
+        <F1 name="form1" errorStyle={{ color: 'red' }}>
           <TB1 title="First Name" className="t1" titleStyle={{ color: 'red' }} required />
           <TB1 title="Last Name" name="lastName" required />
           <TextBox title="DOB" name="dob" required />
@@ -55,7 +55,7 @@ class Form1 extends React.Component {
           <FormControl title="PC" name="pc" type="text" required isValid={all(isNumber, max(10), min(5))} errMsg="error!" default="8" />
           <div>vvv</div>
           <TextBox title="Email" name="email" className="mui-textfield" required isValid={isEmail} />
-          <TextField hintText="Hint Text" title="Name" required />
+          <TextField hintText="Hint Text" title="Name" required onEnter={() => alert('h')} />
           <TextField name="password" floatingLabelText="Password" type="Password" required />
           <hr/>
           <Select title="Make" items={makes} placeholder="--Select a make--" required default={2} />

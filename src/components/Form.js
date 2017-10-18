@@ -83,7 +83,23 @@ class Form extends React.Component {
         if (typeof e.target.value === undefined) val = v;
         this.update({ ...xp, name }, val);
       },
+      onKeyDown: e => e.key,
       onBlur: e => this.update({ ...xp, name }, e.target.value, true),
+    };
+
+    if (xp.onEnter || xp.onEscape) {
+      ps.onKeyDown = e => {
+        switch (e.key) {
+          case 'Enter':
+            xp.onEnter();
+            break;
+          case 'Escape':
+            xp.onEscape();
+            break;
+          default:
+            break;
+        };
+      };
     };
 
     return (

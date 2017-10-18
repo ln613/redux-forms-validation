@@ -4365,9 +4365,27 @@ var Form = function (_React$Component) {
             if (_typeof(e.target.value) === undefined) val = v;
             _this.update(_extends({}, xp, { name: name }), val);
           },
+          onKeyDown: function onKeyDown(e) {
+            return e.key;
+          },
           onBlur: function onBlur(e) {
             return _this.update(_extends({}, xp, { name: name }), e.target.value, true);
           }
+        };
+
+        if (xp.onEnter || xp.onEscape) {
+          ps.onKeyDown = function (e) {
+            switch (e.key) {
+              case 'Enter':
+                xp.onEnter();
+                break;
+              case 'Escape':
+                xp.onEscape();
+                break;
+              default:
+                break;
+            };
+          };
         };
 
         return _react2.default.createElement(
