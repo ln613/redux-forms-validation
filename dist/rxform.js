@@ -271,25 +271,6 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_1__;
 
 /***/ }),
 /* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Provider__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__connect_connect__ = __webpack_require__(31);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Provider", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["b"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createProvider", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "connectAdvanced", function() { return __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "connect", function() { return __WEBPACK_IMPORTED_MODULE_2__connect_connect__["a"]; });
-
-
-
-
-
-
-/***/ }),
-/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
@@ -318,6 +299,25 @@ if(false) {
 	// When the module is disposed, remove the <style> tags
 	module.hot.dispose(function() { update(); });
 }
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Provider__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__connect_connect__ = __webpack_require__(31);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Provider", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["b"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createProvider", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "connectAdvanced", function() { return __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "connect", function() { return __WEBPACK_IMPORTED_MODULE_2__connect_connect__["a"]; });
+
+
+
+
+
 
 /***/ }),
 /* 4 */
@@ -1445,7 +1445,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(3);
+__webpack_require__(2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1584,7 +1584,7 @@ Object.defineProperty(exports, 'InputWrapper', {
 
 var _formsReducer = __webpack_require__(64);
 
-Object.defineProperty(exports, 'formsReducer', {
+Object.defineProperty(exports, 'forms', {
   enumerable: true,
   get: function get() {
     return _interopRequireDefault(_formsReducer).default;
@@ -1622,7 +1622,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(2);
+var _reactRedux = __webpack_require__(3);
 
 var _TextBox = __webpack_require__(20);
 
@@ -4215,72 +4215,34 @@ module.exports = function (css) {
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(2);
+__webpack_require__(2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var CheckBox = function (_React$Component) {
-    _inherits(CheckBox, _React$Component);
-
-    function CheckBox() {
-        var _ref;
-
-        var _temp, _this, _ret;
-
-        _classCallCheck(this, CheckBox);
-
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
-
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = CheckBox.__proto__ || Object.getPrototypeOf(CheckBox)).call.apply(_ref, [this].concat(args))), _this), _this.update = function (v) {
-            return _this.props.dispatch({ type: 'checkbox', name: _this.props.name, value: v });
-        }, _this.change = function (e) {
-            return _this.update(e.target.checked);
-        }, _temp), _possibleConstructorReturn(_this, _ret);
-    }
-
-    _createClass(CheckBox, [{
-        key: 'render',
-        value: function render() {
-            var p = this.props;
-
-            return _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(
-                    'label',
-                    null,
-                    _react2.default.createElement('input', { type: 'checkbox', id: p.id || p.name, name: p.name, value: p.form[p.name],
-                        onChange: this.change, disabled: p.disabled }),
-                    '\xA0',
-                    p.title
-                )
-            );
-        }
-    }]);
-
-    return CheckBox;
-}(_react2.default.Component);
-
-exports.default = (0, _reactRedux.connect)(function (x) {
-    return { form: x.form };
-})(CheckBox);
+exports.default = function (_ref) {
+  var id = _ref.id,
+      name = _ref.name,
+      title = _ref.title,
+      value = _ref.value,
+      disabled = _ref.disabled,
+      onChange = _ref.onChange,
+      className = _ref.className;
+  return _react2.default.createElement(
+    'label',
+    null,
+    _react2.default.createElement('input', { type: 'checkbox', id: id || name, name: name, checked: value,
+      onChange: onChange, disabled: disabled }),
+    '\xA0',
+    title
+  );
+};
 
 /***/ }),
 /* 59 */
@@ -4293,6 +4255,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -4301,7 +4265,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(2);
+var _reactRedux = __webpack_require__(3);
 
 var _InputWrapper = __webpack_require__(21);
 
@@ -4385,9 +4349,9 @@ var Form = function (_React$Component) {
             } })
         );
 
-        if (xp.children) return _react2.default.cloneElement(x, { children: _this.renderChildren(xp, f) });
-
-        if (!xp.name && !xp.title) return x;
+        if (!xp.name && !xp.title) {
+          if (xp.children) return _react2.default.cloneElement(x, { children: _this.renderChildren(xp, f) });else return x;
+        }
 
         var name = xp.name || getNameFromTitle(xp.title);
 
@@ -4395,8 +4359,11 @@ var Form = function (_React$Component) {
           name: name,
           className: xp.className || p.className,
           value: f && f[name] || '',
-          onChange: function onChange(e) {
-            return _this.update(_extends({}, xp, { name: name }), e.target.value);
+          onChange: function onChange(e, i, v) {
+            var val = e.target.value;
+            if (e.target.type === 'checkbox') val = e.target.checked;
+            if (_typeof(e.target.value) === undefined) val = v;
+            _this.update(_extends({}, xp, { name: name }), val);
           },
           onBlur: function onBlur(e) {
             return _this.update(_extends({}, xp, { name: name }), e.target.value, true);
@@ -4477,7 +4444,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(3);
+__webpack_require__(2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4507,7 +4474,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(3);
+__webpack_require__(2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4539,7 +4506,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(2);
+var _reactRedux = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4627,7 +4594,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(3);
+__webpack_require__(2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4640,28 +4607,21 @@ exports.default = function (_ref) {
       disabled = _ref.disabled,
       onChange = _ref.onChange,
       className = _ref.className;
-  return (
-    // componentWillMount() {
-    //     const p = this.props;
-    //     const v = (p.value) || p.default || ((p.placeHolder || !p.items || p.items.length == 0) ? 0 : p.items[0].id);
-    //     this.props.dispatch({ type: 'select', name: p.name, value: v, required: p.requried, title: p.title });
-    // }
-    _react2.default.createElement(
-      'select',
-      { id: id || name, name: name, value: value, className: (className || '') + ' rf-select', onChange: onChange, disabled: disabled },
-      placeholder ? _react2.default.createElement(
+  return _react2.default.createElement(
+    'select',
+    { id: id || name, name: name, value: value, className: (className || '') + ' rf-select', onChange: onChange, disabled: disabled },
+    placeholder ? _react2.default.createElement(
+      'option',
+      { value: '' },
+      placeholder
+    ) : null,
+    (items || []).map(function (x) {
+      return _react2.default.createElement(
         'option',
-        { value: '' },
-        placeholder
-      ) : null,
-      (items || []).map(function (x) {
-        return _react2.default.createElement(
-          'option',
-          { key: x.value, value: x.value },
-          x.text
-        );
-      })
-    )
+        { key: x.value, value: x.value },
+        x.text
+      );
+    })
   );
 };
 
