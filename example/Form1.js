@@ -47,7 +47,7 @@ class Form1 extends React.Component {
   render() {
     return (
       <div className="container">
-        <F1 name="form1" errorStyle={{ color: 'red' }}>
+        <F1 name="form1" className="f" errorStyle={{ color: 'red' }}>
           <TB1 title="First Name" className="t1" titleStyle={{ color: 'red' }} required />
           <TB1 title="Last Name" name="lastName" required />
           <TextBox title="DOB" name="dob" required />

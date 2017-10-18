@@ -102,7 +102,7 @@ class Form extends React.Component {
   render() {
     const p = this.props;
     const f = p.forms[p.name] || { errors: {} };
-    return <div>{this.renderChildren(p, f)}</div>;
+    return <div className={p.className}>{this.renderChildren(p, f)}</div>;
   }
 }
 

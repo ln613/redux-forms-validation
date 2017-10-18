@@ -4402,7 +4402,7 @@ var Form = function (_React$Component) {
       var f = p.forms[p.name] || { errors: {} };
       return _react2.default.createElement(
         'div',
-        null,
+        { className: p.className },
         this.renderChildren(p, f)
       );
     }
