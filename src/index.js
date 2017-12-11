@@ -5,5 +5,5 @@ export { default as RadioButton } from './components/RadioButton';
 export { default as Select } from './components/Select';
 export { default as TextBox } from './components/TextBox';
 export { default as InputWrapper } from './components/InputWrapper';
-export { default as forms } from './formsReducer';
+export { default as formsReducer } from './formsReducer';
 export * from './validators';

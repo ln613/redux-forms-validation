@@ -1,5 +1,4 @@
 ﻿import React from 'react';
-import '../styles/styles.css';
 
 export default ({ id, name, items, value, placeholder, disabled, onChange, className }) => (
   <select id={id || name} name={name} value={value} className={`${className || ''} rf-select`} onChange={onChange} disabled={disabled}>
