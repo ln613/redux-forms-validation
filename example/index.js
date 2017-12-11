@@ -7,6 +7,7 @@ import routes from './routes';
 import configureStore from './store';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'semantic-ui-css/semantic.min.css';
 import 'muicss/dist/css/mui.css';
 import './styles/styles.css';
 import injectTapEventPlugin from 'react-tap-event-plugin';

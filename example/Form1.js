@@ -11,6 +11,7 @@ import { FormControl, Button } from 'react-bootstrap';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import { Icon, Input } from 'semantic-ui-react';
 
 const TB1 = styled(TextBox) `
   &.rf-title {
@@ -72,6 +73,8 @@ class Form1 extends React.Component {
             <MenuItem value={5} primaryText="Weekly" />
           </SelectField>
           <CheckBox title="I agree" required default={true}/>
+          <hr />
+          <Input title="Search Key" placeholder="Search..." required />
           <hr />
           <Button bsStyle="primary" submit>Save</Button>
         </F1>
