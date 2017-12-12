@@ -1,6 +1,6 @@
 {
   "name": "redux-forms-validation",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A javascript library that manages form values in the redux store and provides a validation framework.",
   "main": "dist",
   "scripts": {
