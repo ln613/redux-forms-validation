@@ -6,7 +6,10 @@ class Form extends React.Component {
   componentWillMount() {
     const p = this.props;
     const f = p.forms[p.name];
-    if (!f) this.setDefault(p, f);
+    if (!f) {
+      this.props.dispatch({ type: 'form_create', form: p.name });
+      this.setDefault(p, f);
+    }
   }
 
   setDefault = (p, f) => React.Children.map(p.children, x => {
@@ -48,7 +51,7 @@ class Form extends React.Component {
 
     if (f.errors[n]) return;
 
-    this.update({ ...xp, name: n }, f[n], true);
+    this.update({ ...xp, name: n }, (typeof f[n] === 'undefined') ? null : f[n], true);
   });
 
   // p = current elem's props, f = form obj in the store
@@ -79,9 +82,9 @@ class Form extends React.Component {
       className: xp.className || p.className,
       value: (f && f[name]) || '',
       onChange: (e, i, v) => {
-        let val = e.target.value;
-        if (e.target.type === 'checkbox') val = e.target.checked;
-        if (typeof val === 'undefined') val = i.value;
+        const t = i || e.target;
+        let val = t.value;
+        if (t.type === 'checkbox') val = t.checked;
         if (typeof val === 'undefined') val = v;
         this.update({ ...xp, name }, val);
       },

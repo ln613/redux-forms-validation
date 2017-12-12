@@ -1,5 +1,7 @@
 export default (s = {}, a) => {
   switch (a.type) {
+    case 'form_create':
+      return { ...s, [a.form]: { errors: [] } };
     case 'form_update':
       const s1 = { ...s, [a.form]: { ...s[a.form], [a.name]: a.value } };
       let txt = a.title ? a.title + ' is required' : 'Required';

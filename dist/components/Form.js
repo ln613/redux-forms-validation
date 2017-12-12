@@ -76,7 +76,7 @@ var Form = function (_React$Component) {
 
         if (f.errors[n]) return;
 
-        _this.update(_extends({}, xp, { name: n }), f[n], true);
+        _this.update(_extends({}, xp, { name: n }), typeof f[n] === 'undefined' ? null : f[n], true);
       });
     }, _this.renderChildren = function (p, f) {
       return _react2.default.Children.map(p.children, function (x) {
@@ -108,9 +108,9 @@ var Form = function (_React$Component) {
           className: xp.className || p.className,
           value: f && f[name] || '',
           onChange: function onChange(e, i, v) {
-            var val = e.target.value;
-            if (e.target.type === 'checkbox') val = e.target.checked;
-            if (typeof val === 'undefined') val = i.value;
+            var t = i || e.target;
+            var val = t.value;
+            if (t.type === 'checkbox') val = t.checked;
             if (typeof val === 'undefined') val = v;
             _this.update(_extends({}, xp, { name: name }), val);
           },
@@ -157,7 +157,10 @@ var Form = function (_React$Component) {
     value: function componentWillMount() {
       var p = this.props;
       var f = p.forms[p.name];
-      if (!f) this.setDefault(p, f);
+      if (!f) {
+        this.props.dispatch({ type: 'form_create', form: p.name });
+        this.setDefault(p, f);
+      }
     }
 
     // p = current elem's props, f = form obj in the store

@@ -13,6 +13,8 @@ exports.default = function () {
   var a = arguments[1];
 
   switch (a.type) {
+    case 'form_create':
+      return _extends({}, s, _defineProperty({}, a.form, { errors: [] }));
     case 'form_update':
       var s1 = _extends({}, s, _defineProperty({}, a.form, _extends({}, s[a.form], _defineProperty({}, a.name, a.value))));
       var txt = a.title ? a.title + ' is required' : 'Required';
