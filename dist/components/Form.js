@@ -4,8 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -52,6 +50,7 @@ var Form = function (_React$Component) {
           }
       });
     }, _this.update = function (pc, v, validate) {
+      if (typeof v === 'undefined') return;
       var p = _this.props;
       var o = { form: p.name, name: pc.name, title: pc.title };
       p.dispatch(_extends({ type: 'form_update' }, o, { value: v, required: pc.required }));
@@ -111,7 +110,8 @@ var Form = function (_React$Component) {
           onChange: function onChange(e, i, v) {
             var val = e.target.value;
             if (e.target.type === 'checkbox') val = e.target.checked;
-            if (_typeof(e.target.value) === undefined) val = v;
+            if (typeof val === 'undefined') val = i.value;
+            if (typeof val === 'undefined') val = v;
             _this.update(_extends({}, xp, { name: name }), val);
           },
           onKeyDown: function onKeyDown(e) {

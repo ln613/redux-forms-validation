@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, compose } from 'redux';
 import { formsReducer } from 'redux-forms-validation';
+import 'semantic-ui-css/semantic.min.css';
 import './index.css';
 import App from './App';
 

@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import { Form, TextBox } from 'redux-forms-validation';
+import { Form, TextBox, CheckBox, Select } from 'redux-forms-validation';
+import { Dropdown } from 'semantic-ui-react';
 import './App.css';
+
+const makes = [{ value: 1, text: 'Lexus' }, { value: 2, text: 'Toyota' }];
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
         <Form name="form1">
           <TextBox title="Last Name" required />
+          <CheckBox title="I agree" required default={true} />
+          <Select title="Make 1" items={makes} placeholder="--Select a make--" required default={2} />
+          <Dropdown title="Make 2" placeholder='--Select Make--' fluid selection options={makes} required />
+          <button submit>Submit</button>
         </Form>
       </div>
     );

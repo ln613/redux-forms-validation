@@ -20,6 +20,7 @@ class Form extends React.Component {
   })
 
   update = (pc, v, validate) => {
+    if (typeof v === 'undefined') return;
     const p = this.props;
     const o = { form: p.name, name: pc.name, title: pc.title };
     p.dispatch({ type: 'form_update', ...o, value: v, required: pc.required });
@@ -80,7 +81,8 @@ class Form extends React.Component {
       onChange: (e, i, v) => {
         let val = e.target.value;
         if (e.target.type === 'checkbox') val = e.target.checked;
-        if (typeof e.target.value === undefined) val = v;
+        if (typeof val === 'undefined') val = i.value;
+        if (typeof val === 'undefined') val = v;
         this.update({ ...xp, name }, val);
       },
       onKeyDown: e => e.key,
