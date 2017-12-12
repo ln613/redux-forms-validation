@@ -4,15 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _AddressBox = require('./components/AddressBox');
-
-Object.defineProperty(exports, 'AddressBox', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_AddressBox).default;
-  }
-});
-
 var _CheckBox = require('./components/CheckBox');
 
 Object.defineProperty(exports, 'CheckBox', {
@@ -28,15 +19,6 @@ Object.defineProperty(exports, 'Form', {
   enumerable: true,
   get: function get() {
     return _interopRequireDefault(_Form).default;
-  }
-});
-
-var _RadioButton = require('./components/RadioButton');
-
-Object.defineProperty(exports, 'RadioButton', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_RadioButton).default;
   }
 });
 
