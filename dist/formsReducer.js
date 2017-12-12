@@ -34,6 +34,8 @@ exports.default = function () {
       return _extends({}, s, { form: _extends({}, s.form, { validate: _extends({}, s.form.validate, _defineProperty({}, a.name, a.value)) }) });
     case 'form_invalid':
       return _extends({}, s, _defineProperty({}, a.name + 'Invalid', a.value));
+    case 'form_submitting':
+      return _extends({}, s, _defineProperty({}, a.form, _extends({}, s[a.form], { submitting: a.submitting })));
     default:
       return s;
   }

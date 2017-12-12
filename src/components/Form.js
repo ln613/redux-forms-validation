@@ -3,6 +3,15 @@ import { connect } from 'react-redux';
 import InputWrapper from './InputWrapper';
 
 class Form extends React.Component {
+  componentWillReceiveProps(p) {
+    const f1 = p.forms[p.name];
+    const f2 = this.props.forms[this.props.name];
+    if (f1.submitting && !f2.submitting) {
+      !this.hasError(f1) && f1.submitting();
+      this.props.dispatch({ type: 'form_submitting', form: this.props.name, submitting: null });
+    }
+  }
+
   componentWillMount() {
     const p = this.props;
     const f = p.forms[p.name];
@@ -64,7 +73,12 @@ class Form extends React.Component {
       return (
         <div>
           {this.hasError(f) ? <div className="rf-error">Form has error</div> : null}
-          {React.cloneElement(x, { onClick: () => this.submit(f) })}
+          {React.cloneElement(x, {
+            onClick: e => {
+              this.submit(f);
+              this.props.dispatch({ type: 'form_submitting', form: this.props.name, submitting: xp.onClick });
+            }
+          })}
         </div>
       );
 

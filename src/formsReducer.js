@@ -26,6 +26,8 @@ export default (s = {}, a) => {
       return { ...s, form: { ...s.form, validate: { ...s.form.validate, [a.name]: a.value } } };
     case 'form_invalid':
       return { ...s, [a.name + 'Invalid']: a.value };
+    case 'form_submitting':
+      return { ...s, [a.form]: { ...s[a.form], submitting: a.submitting } };
     default:
       return s;
   }

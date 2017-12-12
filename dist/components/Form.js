@@ -92,9 +92,12 @@ var Form = function (_React$Component) {
             { className: 'rf-error' },
             'Form has error'
           ) : null,
-          _react2.default.cloneElement(x, { onClick: function onClick() {
-              return _this.submit(f);
-            } })
+          _react2.default.cloneElement(x, {
+            onClick: function onClick(e) {
+              _this.submit(f);
+              _this.props.dispatch({ type: 'form_submitting', form: _this.props.name, submitting: xp.onClick });
+            }
+          })
         );
 
         if (!xp.name && !xp.title) {
@@ -153,6 +156,16 @@ var Form = function (_React$Component) {
   }
 
   _createClass(Form, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(p) {
+      var f1 = p.forms[p.name];
+      var f2 = this.props.forms[this.props.name];
+      if (f1.submitting && !f2.submitting) {
+        !this.hasError(f1) && f1.submitting();
+        this.props.dispatch({ type: 'form_submitting', form: this.props.name, submitting: null });
+      }
+    }
+  }, {
     key: 'componentWillMount',
     value: function componentWillMount() {
       var p = this.props;

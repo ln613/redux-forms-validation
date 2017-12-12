@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Form, TextBox, CheckBox, Select } from 'redux-forms-validation';
 import { Dropdown, Checkbox } from 'semantic-ui-react';
 import './App.css';
@@ -17,7 +18,7 @@ class App extends Component {
           <Checkbox radio name="r1" value="2"/> */}
           <Select title="Make 1" items={makes} placeholder="--Select a make--" required default={2} />
           <Dropdown title="Make 2" placeholder='--Select Make--' fluid selection options={makes} required />
-          <button submit>Submit</button>
+          <button submit onClick={() => alert(this.props.form.lastName)}>Submit</button>
         </Form>
         {/* <Checkbox title="I agree 3"  /> */}
       </div>
@@ -25,4 +26,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(s => ({ form: s.forms.form1 }))(App);
