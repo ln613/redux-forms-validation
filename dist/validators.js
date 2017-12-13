@@ -4,9 +4,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var emailPattern = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+var phonePattern = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
 
 var isEmail = exports.isEmail = function isEmail(x) {
-  return new RegExp(emailPattern).test(x);
+  return emailPattern.test(x);
+};
+
+var isPhone = exports.isPhone = function isPhone(x) {
+  return phonePattern.test(x);
 };
 
 var isNumber = exports.isNumber = function isNumber(x) {

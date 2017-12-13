@@ -18,6 +18,10 @@ var _InputWrapper = require('./InputWrapper');
 
 var _InputWrapper2 = _interopRequireDefault(_InputWrapper);
 
+var _util = require('../util');
+
+var _ramda = require('ramda');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -45,38 +49,52 @@ var Form = function (_React$Component) {
         var xp = x.props;
         if (xp.default || Array.isArray(xp.items) && xp.items.length > 1 && !xp.placeholder // select without placeholder
         ) {
-            var name = xp.name || getNameFromTitle(xp.title);
+            var name = xp.name || (0, _util.getNameFromTitle)(xp.title);
             _this.update(_extends({}, xp, { name: name }), xp.default || xp.items[0].value);
           }
       });
-    }, _this.update = function (pc, v, validate) {
+    }, _this.checkAndUpdate = function (f, pc, v, s) {
+      var m = _this.checkError(f, pc, v, s);
+      _this.update(pc, v, m);
+      return m;
+    }, _this.update = function (pc, v, err) {
       if (typeof v === 'undefined') return;
       var p = _this.props;
       var o = { form: p.name, name: pc.name, title: pc.title };
-      p.dispatch(_extends({ type: 'form_update' }, o, { value: v, required: pc.required }));
-      if (v && validate && pc.isValid) p.dispatch(_extends({ type: 'form_valid' }, o, { valid: pc.isValid(v), msg: pc.errMsg }));
-    }, _this.hasError = function (f) {
+      p.dispatch(_extends({ type: 'form_update' }, o, { value: v, required: pc.required, err: err }));
+    }, _this.checkError = function (f, pc, v, s) {
+      return (0, _util.getError)(f, pc.title, pc.name, v, pc.required, pc.isValid, pc.errMsg, s);
+    }, _this.formHasErrorAfterDirty = function (f) {
       return f && f.errors && Object.keys(f.errors).filter(function (x) {
         return f.errors[x];
       }).length > 0;
-    }, _this.submit = function (f) {
-      _this.validateChildren(_this.props, f);
-    }, _this.validateChildren = function (p, f) {
+    }, _this.formHasError = function (f) {
+      return f._dirty ? _this.formHasErrorAfterDirty(f) : !_this.validateChildren(_this.props, f, true);
+    }, _this.propHasError = function (f, p) {
+      return f && f.errors && f.errors[p];
+    }, _this.submit = function (f, onClick) {
+      if (_this.validateChildren(_this.props, f)) onClick();
+    }, _this.validateChildren = function (p, f, checkOnly) {
       return _react2.default.Children.map(p.children, function (x) {
         var xp = x.props;
 
-        if (!xp) return;
+        if (!xp) return true;
 
-        var n = xp.name || getNameFromTitle(xp.title || '');
+        var n = xp.name || (0, _util.getNameFromTitle)(xp.title || '');
 
         if (!n) {
-          if (xp.children) _this.validateChildren(xp, f);
-          return;
+          if (xp.children) return _this.validateChildren(xp, f, checkOnly);
+          return true;
         }
 
-        if (f.errors[n]) return;
+        if (f.errors[n]) return false;
 
-        _this.update(_extends({}, xp, { name: n }), typeof f[n] === 'undefined' ? null : f[n], true);
+        var pc = _extends({}, xp, { name: n });
+        var v = typeof f[n] === 'undefined' ? null : f[n];
+
+        return (0, _ramda.isNil)(checkOnly ? _this.checkError(f, pc, v) : _this.checkAndUpdate(f, pc, v));
+      }).every(function (v) {
+        return v;
       });
     }, _this.renderChildren = function (p, f) {
       return _react2.default.Children.map(p.children, function (x) {
@@ -87,16 +105,16 @@ var Form = function (_React$Component) {
         if (xp.submit) return _react2.default.createElement(
           'div',
           null,
-          _this.hasError(f) ? _react2.default.createElement(
+          _this.formHasErrorAfterDirty(f) ? _react2.default.createElement(
             'div',
             { className: 'rf-error' },
             'Form has error'
           ) : null,
           _react2.default.cloneElement(x, {
             onClick: function onClick(e) {
-              _this.submit(f);
-              _this.props.dispatch({ type: 'form_submitting', form: _this.props.name, submitting: xp.onClick });
-            }
+              return _this.submit(f, xp.onClick);
+            },
+            disabled: xp.disableOnError && _this.formHasError(f)
           })
         );
 
@@ -104,7 +122,7 @@ var Form = function (_React$Component) {
           if (xp.children) return _react2.default.cloneElement(x, { children: _this.renderChildren(xp, f) });else return x;
         }
 
-        var name = xp.name || getNameFromTitle(xp.title);
+        var name = xp.name || (0, _util.getNameFromTitle)(xp.title);
 
         var ps = {
           name: name,
@@ -115,13 +133,13 @@ var Form = function (_React$Component) {
             var val = t.value;
             if (t.type === 'checkbox') val = t.checked;
             if (typeof val === 'undefined') val = v;
-            _this.update(_extends({}, xp, { name: name }), val);
+            _this.checkAndUpdate(f, _extends({}, xp, { name: name }), val, true);
           },
           onKeyDown: function onKeyDown(e) {
             return e.key;
           },
           onBlur: function onBlur(e) {
-            return _this.update(_extends({}, xp, { name: name }), e.target.value, true);
+            return _this.checkAndUpdate(f, _extends({}, xp, { name: name }), e.target.value);
           }
         };
 
@@ -144,7 +162,7 @@ var Form = function (_React$Component) {
           _InputWrapper2.default,
           {
             title: x.props.title,
-            className: ignoreBootStrap(xp.className) || ignoreBootStrap(p.className),
+            className: (0, _util.ignoreBootStrap)(xp.className) || (0, _util.ignoreBootStrap)(p.className),
             titleStyle: xp.titleStyle || p.titleStyle,
             errorStyle: xp.erroStyle || p.errorStyle,
             error: f && f.errors && f.errors[name] || ''
@@ -156,16 +174,6 @@ var Form = function (_React$Component) {
   }
 
   _createClass(Form, [{
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(p) {
-      var f1 = p.forms[p.name];
-      var f2 = this.props.forms[this.props.name];
-      if (f1.submitting && !f2.submitting) {
-        !this.hasError(f1) && f1.submitting();
-        this.props.dispatch({ type: 'form_submitting', form: this.props.name, submitting: null });
-      }
-    }
-  }, {
     key: 'componentWillMount',
     value: function componentWillMount() {
       var p = this.props;
@@ -193,20 +201,6 @@ var Form = function (_React$Component) {
 
   return Form;
 }(_react2.default.Component);
-
-var ignoreBootStrap = function ignoreBootStrap(x) {
-  return x && x.replace(/form-control/g, '');
-};
-
-var getNameFromTitle = function getNameFromTitle(t) {
-  return t.trim().split(' ').map(function (x) {
-    return x.trim();
-  }).filter(function (x) {
-    return x;
-  }).map(function (x, i) {
-    return i > 0 ? x[0].toUpperCase() + x.slice(1).toLowerCase() : x.toLowerCase();
-  }).join('');
-};
 
 exports.default = (0, _reactRedux.connect)(function (x) {
   return { forms: x.forms };
